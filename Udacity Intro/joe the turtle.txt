@@ -1,0 +1,14 @@
+import turtle
+
+def draw_square():
+	window = turtle.Screen()
+	window.bcolor("black")
+	
+	joe = turtle.Turtle()
+	joe.shape("turtle")
+	joe.color("pink")
+	joe.speed(3)
+	
+	for i in range(0,3):
+		joe.forward(100)
+		joe.right(90)
