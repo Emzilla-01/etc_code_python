@@ -1,0 +1,53 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Fri Jul 13 17:56:36 2018
+
+*** Friday the 13th ***
+
+Script will write a textfile which records the months and years
+of the next n instances of Friday the 13th as defined by "get_next_n".
+
+Could be improved by being modularized or taking input by argv.
+
+@author: orpha
+"""
+
+import datetime
+
+a_time = datetime.datetime(2018,7,13)
+a_time.day == 13 # 
+a_time.weekday() == 4 # .weekday() : 4 is Friday #help(datetime.datetime.weekday)
+
+def is_friday13(date_time):
+    try:
+        assert type(date_time) == datetime.datetime
+    except:
+        print(e, "... ", " *not datetime.datetime*")
+    
+    try:
+        assert date_time.day == 13
+        assert date_time.weekday() == 4
+        return(True)
+    except:
+        return(False)
+        
+        
+get_next_n = 100
+next_holidays = list()
+
+t0 = datetime.datetime.now()
+
+
+while len(next_holidays) < get_next_n:
+    if is_friday13(t0):
+        next_holidays.append(t0)
+        t0 = t0 + datetime.timedelta(1)
+    else:
+        t0 = t0 + datetime.timedelta(1)
+
+with open("Friday_13th_Planner.txt", "wt", encoding="utf-8") as textfile:
+    textfile.write("Friday the 13th will occur in these months:\n")
+    print("Friday the 13th will occur in these months:")
+    for holiday in next_holidays:
+        textfile.write(holiday.strftime("%B %Y")+"\n")
+        print(holiday.strftime("%B %Y"))
